@@ -23,6 +23,6 @@ endfunction
 function! visitf#next()
   let curr_path = expand('%:p')
   let next_path_abs = visitf#next_path(curr_path)
-  let next_path_rel = fnamemodify(next_path_abs, ":~:.")
+  let next_path_rel = fnamemodify(next_path_abs, ':~:.')
   edit `=next_path_rel`
 endfunction
