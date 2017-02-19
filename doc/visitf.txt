@@ -1,0 +1,82 @@
+*visitf.txt*	Open the file where the current path rewritten.
+
+Version: 0.1.0
+Author : kusabashira <kusabashira227@gmail.com>
+License: MIT License
+
+==============================================================================
+CONTENTS					*visitf-contents*
+
+INTRODUCTION		|visitf-introduction|
+INTERFACE		|visitf-interface|
+  KEY MAPPINGS		  |visitf-key-mappings|
+  VARIABLES		  |visitf-variables|
+CHANGELOG		|visitf-changelog|
+
+
+==============================================================================
+INTRODUCTION					*visitf-introduction*
+
+*visitf* is a Vim plugin which provides a way
+to open the file where the current path rewritten.
+
+Requirements:
+- Vim 8.0 or later
+
+Latest version:
+https://github.com/kusabashira/vim-visitf
+
+
+==============================================================================
+INTERFACE					*visitf-interface*
+
+------------------------------------------------------------------------------
+KEY MAPPINGS					*visitf-key-mappings*
+
+<Plug>(visitf-next)				*<Plug>(visitf-next)*
+		Open the following file according to the rule
+		written in |g:visitf_rules|.
+
+------------------------------------------------------------------------------
+VARIABLES 					*visitf-variables*
+
+g:visitf_rules					*g:visitf_rules*
+		This is a list variable which describes the rules that
+		"If the current path mathces this regexp, rewrite the path by
+		this function and open".
+		
+		Elements in the list have the following keys:
+
+		"at" is a regexp which detects target to be rewritten.
+		(required)
+
+		"rewrite" is a function which recive the current path
+		and return the rewrited path.
+		(required)
+
+		"check_exists" is a boolean value which describe whether
+		or not to open even if the rewritten path doesn't exist.
+		(not required. default: 1)
+>
+		" Example to switch plugin/*.vim and autoload/*.vim.
+		let g:visitf_rules = [
+		\   {
+		\     'at': 'plugin.*\.vim$',
+		\     'rewrite': {path -> substitute(path, 'plugin\(.*\)\.vim$', 'autoload\1.vim', '')},
+		\   },
+		\   {
+		\     'at': 'autoload.*\.vim$',
+		\     'rewrite': {path -> substitute(path, 'autoload\(.*\)\.vim$', 'plugin\1.vim', '')},
+		\   },
+		\ ]
+<
+
+==============================================================================
+CHANGELOG					*visitf-changelog*
+
+0.1.0	2015-06-25
+	- Initial version.
+
+
+==============================================================================
+vim:tw=78:fo=tcq2mM:ts=8:ft=help:norl
