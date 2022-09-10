@@ -24,7 +24,7 @@ Requirements:
 - Vim 8.0 or later
 
 Latest version:
-https://github.com/nil2nekoni/vim-visitf
+https://github.com/nil-two/vim-visitf
 
 
 ==============================================================================
